@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #181818;
+        color: #fff;
+        font-family: sans-serif;
+        margin: 0;
+      }
+
+      img,
+      video {
+        max-width: 100%;
+      }
+
+      main {
+        background-color: #282828;
+
+        padding: 1em;
+        padding-bottom: 4em;
+
+        max-width: 40em;
+        min-height: 100vh;
+        box-sizing: border-box;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      .messages {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+
+      .messages span {
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        display: block;
+
+        background-color: #484848;
+        text-align: left;
+        width: fit-content;
+        padding: 0.5em;
+        margin: 0;
+        margin-right: auto;
+      }
+      .messages span.plus,
+      .messages span.minus {
+        font-family: consolas;
+        font-weight: bold;
+        padding: 1em;
+        display: flex;
+      }
+      .messages span.plus img,
+      .messages span.minus img {
+        width: 48px;
+        height: 48px;
+      }
+      .messages span.plus {
+        background-color: green;
+      }
+      .messages span.minus {
+        background-color: red;
+      }
+      .messages span.action {
+        font-style: italic;
+      }
+
+      .sent {
+        padding: 0.5em;
+        display: block;
+        background-color: #383838;
+        text-align: right;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: 2em;
+      }
+
+      .message {
+        display: flex;
+        gap: 0.5em;
+      }
+
+      .message > img {
+        width: 52px;
+        height: 52px;
+      }
+
+      .username {
+        display: block;
+        padding-left: 0.5em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        font-family: consolas;
+      }
+
+      #typing-indicator {
+        display: flex;
+        margin-top: 1em;
+        gap: 0.5em;
+      }
+
+      #typing-indicator .dot {
+        margin: 0;
+        width: 0.6em;
+        height: 0.6em;
+        background-color: white;
+        border-radius: 50%;
+      }
+
+      .dot:nth-child(1) {
+        animation: bounce 1s infinite;
+      }
+
+      .dot:nth-child(2) {
+        animation: bounce 1s infinite 0.3s;
+      }
+
+      .dot:nth-child(3) {
+        animation: bounce 1s infinite 0.6s;
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-8px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      #choices {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        /* 2 columns */
+        grid-template-rows: 1fr 1fr;
+        /* 2 rows */
+        gap: 0.5em;
+      }
+
+      #choices span {
+        display: block;
+        padding: 1em;
+
+        background-color: #444;
+        color: #ddd;
+        cursor: pointer;
+      }
+
+      #choices span:nth-child(2),
+      #choices span:nth-child(4) {
+        text-align: right;
+      }
+
+      #choices span:hover {
+        background-color: #555;
+      }
+
+      #score {
+        text-align: center;
+        background-color: #444;
+        padding: 1em 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main></main>
+
+    <div style="display: none">
+      <audio loop src="ccp bgm.mp3">
+        Your browser does not support the audio tag.
+      </audio>
+    </div>
+    <script src="main.js"></script>
+    <script>
+      const main = document.querySelector("main");
+      displayMessage(icebreaker, 0);
+
+      function removeChoices() {
+        document.getElementById("choices").remove();
+      }
+      function showChoices(choices) {
+        main.innerHTML += `<div id="choices"></div>`;
+        const choicesContainer = document.getElementById("choices");
+        newHTML = "";
+        for (let c of choices) {
+          newHTML += `<span>${c.content}</span>`;
+        }
+        choicesContainer.innerHTML = newHTML;
+        choicesContainer.querySelectorAll("span").forEach((s, i) => {
+          s.onclick = () => {
+            removeChoices();
+            main.innerHTML += `<span class="sent">${choices[i].content}</span>`;
+            displayMessage(choices[i].nextConFlow, 0);
+          };
+        });
+        choicesContainer.style.display = "grid";
+      }
+      function insertTypingIndicator() {
+        document.querySelector(".message:last-child .messages").innerHTML += `
+            <div id="typing-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>`;
+      }
+      function removeTypingIndicator() {
+        document.getElementById("typing-indicator").remove();
+      }
+      function scrollToBottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+      function displayMessage(cfid, msgid) {
+        const cf = conflows[cfid];
+        const msg = cf.messages[msgid];
+        let lastAuthor;
+        if (msgid == 0) {
+          cf.init();
+        } else {
+          lastAuthor = cf.messages[msgid - 1].author;
+        }
+
+        if (msg.author != lastAuthor) {
+          main.innerHTML += `
+                <div class="message">
+                    <img src="${authors[msg.author].profile}">
+                    <div>
+                        <span class="username">${
+                          authors[msg.author].username
+                        }</span>
+                        <div class="messages">
+                        </div>
+                    </div>
+                </div>
+                `;
+        }
+        const messagesContainer = document.querySelector(
+          ".message:last-child .messages"
+        );
+
+        // typing speed: 10 words a second
+        const typingDuration = (0.5 + msg.content.split(" ").length * 0.1) * 1000;
+        // processing speed: 4 words a second
+        let processingDuration = msg.content.split(" ").length * 0.25 * 1000;
+        if (msg.content.includes("<video")) {
+          processingDuration =
+            1000 *
+            videoDuration[
+              msg.content.split(".mp4")[0].split("videos/")[1] + ".mp4"
+            ] *
+            1.5;
+        }
+
+        insertTypingIndicator();
+        scrollToBottom();
+
+        setTimeout(() => {
+          removeTypingIndicator();
+          switch (msg.content[0]) {
+            case "+":
+              messagesContainer.innerHTML += `<span class="plus">${msg.content} <img src='profiles/up.png'></span>`;
+              break;
+            case "-":
+              messagesContainer.innerHTML += `<span class="minus">${msg.content} <img src='profiles/down.png'></span>`;
+              break;
+            case "*":
+              messagesContainer.innerHTML += `<span class="action">${msg.content}</span>`;
+              break;
+            default:
+              messagesContainer.innerHTML += `<span>${msg.content}</span>`;
+          }
+
+          scrollToBottom();
+
+          setTimeout(() => {
+            if (msgid == cf.messages.length - 1) {
+              if (cf.choices) {
+                if (cf.choices[0].content) {
+                  showChoices(cf.choices);
+                  scrollToBottom();
+                } else {
+                  displayMessage(cf.choices[0].nextConFlow, 0);
+                }
+              } else {
+                main.innerHTML += `<span id='score'>SOCIAL CREDITS SCORE: <b>${socialCredits}</b></span>`;
+                scrollToBottom();
+              }
+            } else {
+              displayMessage(cfid, msgid + 1);
+            }
+          }, processingDuration);
+        }, typingDuration);
+      }
+    </script>
+  </body>
+</html>
