@@ -136,7 +136,9 @@ const conflows = {
   ],
   1: [
     () => {
-      document.querySelector("audio").play();
+      const bgm = document.getElementById("bgm")
+      bgm.volume = 0.6;
+      bgm.play();
     },
     [
       ["n", "<img src='profiles/xon-xina.jpg'>"],
@@ -299,7 +301,7 @@ const conflows = {
       ["w", "<img src='videos/sus wok.gif'>"],
       ["n", "arrest him, to torture chamber"],
       ["b", "NO, i like burgers too"],
-      ["b", "+ 100"],
+      ["b", "+ 100 social credits"],
       ["br", "let us not jump into conclusions"],
       ["x", "克森，带他来"],
       ["s", "Xon, bring him"],
@@ -449,7 +451,7 @@ const conflows = {
     [
       ["x", "+ 15999 social credits"],
       ["y", "give him some of your carrots as a reward"],
-      ["b", "shares"],
+      ["b", "<img src='profiles/shang abi.jpg'>"],
     ],
     [["", "one child policy"]],
   ],
@@ -525,7 +527,7 @@ const conflows = {
       ],
       ["br", "shut you goddam ass up"],
       ["br", "there is one way to solve the issue here"],
-      ["s", "please, she is the last person i remember i love"],
+      ["s", "please, she is the only person i remember i love"],
     ],
     [
       ["abortion", "abort second child"],

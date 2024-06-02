@@ -178,13 +178,37 @@
   <body>
     <main></main>
 
-    <div style="display: none">
-      <audio loop src="ccp bgm.mp3">
-        Your browser does not support the audio tag.
-      </audio>
+    <div id="preloader" style="display: none">
+      <audio id="bgm" loop src="ccp bgm.mp3"></audio>
+      <audio class="up" src="up.mp3"></audio>
+      <audio class="down" src="down.mp3"></audio>
+      <img src="profiles/bruce lee.jpg" />
+      <img src="profiles/bruce serious.jpg" />
+      <img src="profiles/bruce-smiling.jpg" />
+      <img src="profiles/ching-cheng-hanji.jpg" />
+      <img src="profiles/down.png" />
+      <img src="profiles/up.png" />
+      <img src="profiles/kitten.jpg" />
+      <img src="profiles/mad.jpg" />
+      <img src="profiles/shang abi.jpg" />
+      <img src="profiles/super-idol.jpg" />
+      <img src="profiles/tank man.jpg" />
+      <img src="profiles/the-wok.jpg" />
+      <img src="profiles/xi jinping.jpg" />
+      <img src="profiles/xon-xina.jpg" />
+      <img src="profiles/yun.jpg" />
+
+      <img src="videos/sus wok.gif" />
+      <img src="videos/xon xina dance.gif" />
+
+      <source src="videos/shang abi dancing in the gym.mp4" type="video/mp4" />
+      <source src="videos/shang abi watermelon.mp4.mp4" type="video/mp4" />
+      <source src="videos/super idol.mp4" type="video/mp4" />
     </div>
     <script src="main.js"></script>
     <script>
+      const upAudio = document.querySelector("audio.up");
+      const downAudio = document.querySelector("audio.down");
       const main = document.querySelector("main");
       displayMessage(icebreaker, 0);
 
@@ -219,8 +243,9 @@
       function removeTypingIndicator() {
         document.getElementById("typing-indicator").remove();
       }
+
       function scrollToBottom() {
-        window.scrollTo(0, document.body.scrollHeight);
+        main.scrollIntoView({ block: 'end' })
       }
       function displayMessage(cfid, msgid) {
         const cf = conflows[cfid];
@@ -251,7 +276,8 @@
         );
 
         // typing speed: 10 words a second
-        const typingDuration = (0.5 + msg.content.split(" ").length * 0.1) * 1000;
+        const typingDuration =
+          (0.45 + msg.content.split(" ").length * 0.1) * 1000;
         // processing speed: 4 words a second
         let processingDuration = msg.content.split(" ").length * 0.25 * 1000;
         if (msg.content.includes("<video")) {
@@ -271,9 +297,11 @@
           switch (msg.content[0]) {
             case "+":
               messagesContainer.innerHTML += `<span class="plus">${msg.content} <img src='profiles/up.png'></span>`;
+              upAudio.play();
               break;
             case "-":
               messagesContainer.innerHTML += `<span class="minus">${msg.content} <img src='profiles/down.png'></span>`;
+              downAudio.play();
               break;
             case "*":
               messagesContainer.innerHTML += `<span class="action">${msg.content}</span>`;
