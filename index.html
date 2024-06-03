@@ -245,7 +245,9 @@
       }
 
       function scrollToBottom() {
-        main.scrollIntoView({ block: "end" });
+        setTimeout(() => {
+          window.scrollTo(0, document.documentElement.scrollHeight);
+        }, 50);
       }
       function displayMessage(cfid, msgid) {
         const cf = conflows[cfid];
@@ -325,7 +327,9 @@
                 main.innerHTML += `<span id='score'>SOCIAL CREDITS SCORE: <b>${socialCredits}</b></span>`;
                 if (socialCredits <= 0) {
                   const ed = new Date(Date.now() + 48 * 60 * 60 * 1000);
-                  main.innerHTML += `<span id='score'>EXECUTION DATE: <b>${ed.getFullYear}/${ed.getMonth}/${ed.getDate()}</b></span>`;
+                  main.innerHTML += `<span id='score'>EXECUTION DATE: <b>${
+                    ed.getFullYear
+                  }/${ed.getMonth}/${ed.getDate()}</b></span>`;
                 }
                 scrollToBottom();
               }

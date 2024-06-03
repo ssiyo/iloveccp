@@ -384,7 +384,7 @@ const conflows = {
         "yes son, you are right and never let these airheads change your view",
       ],
       ["k", "i love you"],
-      ["y", "\"all creatures\"...you did not just say that"],
+      ["y", '"all creatures"...you did not just say that'],
       ["a", "you mean all creatures except cats, right?"],
       [
         "y",
@@ -1087,7 +1087,10 @@ const conflows = {
     () => {
       socialCredits -= 50;
     },
-    [["br", "- 50 social credits"],["br", "do not play stupid"]],
+    [
+      ["br", "- 50 social credits"],
+      ["br", "do not play stupid"],
+    ],
     [["", "june 4 1989"]],
   ],
   lost: [
