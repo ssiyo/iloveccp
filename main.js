@@ -115,10 +115,10 @@ const authors = {
   },
 };
 const videoDuration = {
-  "shang abi dancing in the gym.mp4":10,
-  "shang abi watermelon.mp4":8,
-  "super idol.mp4":15
-}
+  "shang abi dancing in the gym.mp4": 10,
+  "shang abi watermelon.mp4": 8,
+  "super idol.mp4": 15,
+};
 let socialCredits = 0;
 
 const icebreaker = "0";
@@ -136,7 +136,7 @@ const conflows = {
   ],
   1: [
     () => {
-      const bgm = document.getElementById("bgm")
+      const bgm = document.getElementById("bgm");
       bgm.volume = 0.6;
       bgm.play();
     },
@@ -200,7 +200,7 @@ const conflows = {
       ["n", "everyone, silence, the supreme leader has arrived"],
       [
         "n",
-        "super idol, tranlsate or we will eliminate more of your familly members",
+        "super idol, tranlsate or we will eliminate more of your family members",
       ],
       [
         "n",
@@ -230,7 +230,7 @@ const conflows = {
       ["x", "他为什么不坐下来？\n让执行团队做好这件事的准备"],
       [
         "s",
-        "why is he sitting down?\nprepare the execution team for this thing",
+        "why was he sitting down?\nprepare the execution team for this thing",
       ],
       ["y", "- 200 social credits"],
       ["n", "yes sir"],
@@ -384,7 +384,7 @@ const conflows = {
         "yes son, you are right and never let these airheads change your view",
       ],
       ["k", "i love you"],
-      ["y", "all creatures...you did not just say that"],
+      ["y", "\"all creatures\"...you did not just say that"],
       ["a", "you mean all creatures except cats, right?"],
       [
         "y",
@@ -469,7 +469,7 @@ const conflows = {
         "y",
         "here is an easier scenario, a uyghur escaped from torture camps and is hiding in your house",
       ],
-      ["br", "<img src='profile/bruce serious.jpg'>"],
+      ["br", "<img src='profiles/bruce serious.jpg'>"],
       ["br", "what do you do"],
     ],
     [
@@ -570,7 +570,7 @@ const conflows = {
   "travel country": [
     () => {},
     [
-      ["y", "where do you want to travel"],
+      ["y", "what country do you want to travel to"],
       [
         "b",
         "i want to go to america, i heard girls there are prettier than the chinese",
@@ -695,32 +695,33 @@ const conflows = {
       `,
       ],
       ["y", "STOP IT"],
-      ["b", "hey hey hhey, yo man"],
-      ["s", "come on that was uncool, give him the phone back"],
+      ["b", "hey hey hey, yo man"],
+      ["s", "come on that was not cool, give him the phone back"],
       ["y", "HOW RETARDED ARE YOU"],
       [
         "y",
         "leaking the location of the supreme leader on social media, did you not notice his face was in the video",
       ],
       ["b", "so you want me to dance with him?"],
-      ["y", "i am deleting you tiktko account"],
+      ["y", "i am deleting you tiktok account"],
       ["b", "WHAT"],
       ["s", "WHAT"],
       ["t", "WHAT"],
       ["w", "i think you are going too far with that"],
       ["n", "yeah, i agree, let the man enjoy himself and have an audience"],
+      ["y", "listen to me everyone"],
       [
         "y",
-        "listen to me everyone, whoever has tiktok on this room shall immediately uninstall it or i will report him to the CCP",
+        "whoever has tiktok in this room shall immediately uninstall it or i will report him to the CCP",
       ],
       ["n", "can i delete after reaching 20K followers first"],
-      ["y", "NO, delete now, give me that, *uninstall*"],
+      ["y", "NO, delete now, give me that, *uninstalled*"],
       ["y", "here abi, i uninstalled tiktok"],
-      ["w", "do not look at me, i am in my dopamine detox period"],
+      ["w", "do not look at me, i am on my dopamine detox period"],
       ["t", "ok, ok, i am trying to uninstall but where is the button"],
       [
         "y",
-        "here, wait, what is that? your username is bigbossdaddy, how? so you were that one that liked my dance last year?",
+        "here, wait, what is that? your username is @bigbossdaddy, how? so you were that one that liked my dance last year?",
       ],
       [
         "t",
@@ -729,7 +730,7 @@ const conflows = {
       ["y", "here i uninstalled it"],
       ["br", "i do not have a phone"],
       ["x", "*uninstalling secretly under the table*"],
-      ["s", "uninstalled"],
+      ["s", "*uninstalled*"],
       ["y", "piece 50689, why do you have tiktok?"],
     ],
     [
@@ -741,12 +742,12 @@ const conflows = {
   ],
   "CCP tiktokers": [
     () => {
-      socialCredits += 600000;
+      socialCredits += 1000000;
     },
     [
       ["y", "+ 4000 social credits"],
       ["s", "+ 106000 social credits"],
-      ["b", "880000 social credits"],
+      ["b", "+ 890000 social credits"],
     ],
     [["", "chinese sim card"]],
   ],
@@ -928,23 +929,23 @@ const conflows = {
       socialCredits += 1000;
     },
     [["y", "+ 100 social credits"]],
-    [["", "f on math"]],
+    [["", "f in math"]],
   ],
   "wrote gaokao": [
     () => {
       socialCredits += 100000;
     },
     [["y", "+ 10000 social credits"]],
-    [["", "f on math"]],
+    [["", "f in math"]],
   ],
   "not chinese": [
     () => {
       socialCredits -= 199995000;
     },
     [["y", "- 199995000 social credits"]],
-    [["", "f on math"]],
+    [["", "f in math"]],
   ],
-  "f on math": [
+  "f in math": [
     () => {},
     [
       ["br", "my turn to question"],
@@ -952,7 +953,7 @@ const conflows = {
       ["w", "i swear i only have one, please do not kill my wife"],
       [
         "br",
-        "relax, it is not about your wife, your son Mr. Lee Wok scored an F on math",
+        "relax, it is not about your wife, Mr. Lee Wok, your son scored an F in math",
       ],
       [
         "br",
@@ -1070,7 +1071,7 @@ const conflows = {
       ["n", "yes sir, here, *hands it to bruce*"],
       ["br", "well, i almost forgot about this"],
       ["br", "take a look old man, you recognize this"],
-      ["t", "me on my youth and the guy on that leading tank"],
+      ["t", "me in my youth and the guy on that leading tank"],
       ["n", "was me huh"],
       ["br", "piece 50689, describe the picture"],
       ["br", "<img src='profiles/tank man.jpg'>"],
@@ -1086,14 +1087,14 @@ const conflows = {
     () => {
       socialCredits -= 50;
     },
-    [["br", "- 50 social credits"]],
+    [["br", "- 50 social credits"],["br", "do not play stupid"]],
     [["", "june 4 1989"]],
   ],
   lost: [
     () => {
-      socialCredits += 500;
+      socialCredits += 5090000;
     },
-    [["br", "+ 500 social credits"]],
+    [["br", "+ 5090000 social credits"]],
     [["", "june 4 1989"]],
   ],
   blind: [
@@ -1115,7 +1116,7 @@ const conflows = {
     [
       [
         "br",
-        "now a quick question, what happened on tiananmen square on june 4, 1989",
+        "now a quick question, what happened in tiananmen square on june 4, 1989",
       ],
       ["b", "i reached 10K followers"],
       ["s", "i bought my first bottle"],

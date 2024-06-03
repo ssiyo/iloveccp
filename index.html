@@ -245,7 +245,7 @@
       }
 
       function scrollToBottom() {
-        main.scrollIntoView({ block: 'end' })
+        main.scrollIntoView({ block: "end" });
       }
       function displayMessage(cfid, msgid) {
         const cf = conflows[cfid];
@@ -323,6 +323,10 @@
                 }
               } else {
                 main.innerHTML += `<span id='score'>SOCIAL CREDITS SCORE: <b>${socialCredits}</b></span>`;
+                if (socialCredits <= 0) {
+                  const ed = new Date(Date.now() + 48 * 60 * 60 * 1000);
+                  main.innerHTML += `<span id='score'>EXECUTION DATE: <b>${ed.getFullYear}/${ed.getMonth}/${ed.getDate()}</b></span>`;
+                }
                 scrollToBottom();
               }
             } else {
